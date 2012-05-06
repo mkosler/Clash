@@ -13,9 +13,9 @@ class Checkbox extends Button
 	private var _hoverChecked : Image;
 	private var _downChecked : Image;
 
-	private var _checked : Bool;
+	public var checked : Bool;
 
-	public function new(x : Float, y : Float, text : String = "", calling : CallbackFunction = null)
+	public function new(x : Float, y : Float, text : String = "", calling : Void -> Void = null)
 	{
 		super(x, y, text, calling);
 
@@ -41,19 +41,19 @@ class Checkbox extends Button
 
 		setHitbox(_normal.width + label.width, _normal.height);
 
-		_checked = false;
+		checked = false;
 	}
 
-	private override function Click() : Void
+	private override function click() : Void
 	{
-		_checked = !_checked;
+		checked = !checked;
 
-		super.Click();
+		super.click();
 	}
 
 	private override function changeState(state : Int = 0) : Void
 	{
-		if (_checked) {
+		if (checked) {
 			switch (state) {
 				case Button.NORMAL:
 					graphic = _normalChecked;

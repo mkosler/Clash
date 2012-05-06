@@ -9,10 +9,6 @@ import com.haxepunk.utils.Input;
 import nme.geom.Point;
 import nme.geom.Rectangle;
 
-// Until I figure out how to correctly allow for "any" function to be processed,
-// all callbacks must be Void -> Void
-typedef CallbackFunction = Void -> Void;
-
 class Button extends Entity 
 {
 	private static inline var NORMAL : Int = 0;
@@ -26,14 +22,14 @@ class Button extends Entity
 
 	private var label : Text;
 
-	private var _calling : CallbackFunction;
+	public var calling : Void -> Void;
 
 	private var _clicked : Bool;
 
 	private var _myPoint : Point;
 	private var _myCamera : Point;
 
-	public function new(x : Float, y : Float, text : String = "", calling : CallbackFunction = null)
+	public function new(x : Float, y : Float, text : String = "", calling : Void -> Void = null)
 	{
 		super(x, y);
 
@@ -52,7 +48,7 @@ class Button extends Entity
 		label.x = (width - label.width) / 2;
 		label.y = (height - label.height) / 2;
 
-		_calling = calling;
+		this.calling = calling;
 		_clicked = false;
 		_myPoint = HXP.point;
 		_myCamera = HXP.point2;
@@ -73,8 +69,8 @@ class Button extends Entity
 				changeState(HOVER);
 			}
 
-			if ((_calling != null) && _clicked && Input.mouseReleased) {
-				Click();
+			if (_clicked && Input.mouseReleased) {
+				click();
 			}
 		} else {
 			if (_clicked) {
@@ -89,9 +85,11 @@ class Button extends Entity
 		}
 	}
 
-	private function Click() : Void 
+	private function click() : Void 
 	{
-		_calling();
+		if (calling != null) {
+			calling();
+		}
 	}
 
 	private function changeState(state : Int = 0)

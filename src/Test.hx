@@ -5,6 +5,7 @@ import com.haxepunk.HXP;
 
 import clash.Button;
 import clash.Checkbox;
+import clash.RadioButton;
 
 class Test extends World 
 {
@@ -17,6 +18,11 @@ class Test extends World
 	{
 		add(new Button(10, 50, "Press me!", ButtonCallback));
 		add(new Checkbox(10, 100, "Check me!", CheckboxCallback));
+
+		var group1 : RadioGroup = new RadioGroup(RadioCallback);
+		add(new RadioButton(10, 150, group1, "Number 1!"));
+		add(new RadioButton(10, 175, group1, "Number 2!"));
+		add(new RadioButton(10, 200, group1, "Number 3!"));
 	}
 
 	private function ButtonCallback() : Void
@@ -27,5 +33,10 @@ class Test extends World
 	private function CheckboxCallback() : Void
 	{
 		trace("In CheckboxCallback");
+	}
+
+	private function RadioCallback(id : String) : Void
+	{
+		trace(Std.format("In RadioCallback: ${id}"));
 	}
 }
