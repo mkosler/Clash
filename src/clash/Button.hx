@@ -74,7 +74,7 @@ class Button extends Entity
 			}
 
 			if ((_calling != null) && _clicked && Input.mouseReleased) {
-				_calling();
+				Click();
 			}
 		} else {
 			if (_clicked) {
@@ -87,6 +87,11 @@ class Button extends Entity
 		if (Input.mouseReleased) {
 			_clicked = false;
 		}
+	}
+
+	private function Click() : Void 
+	{
+		_calling();
 	}
 
 	private function changeState(state : Int = 0)
@@ -110,14 +115,6 @@ class Button extends Entity
 
 	private function renderGraphic(graphic : Graphic) : Void
 	{
-		trace("In renderGraphic");
-		if (graphic != null) {
-			trace(Std.format("Graphic: ${graphic}, visible: ${graphic.visible}, relative: ${graphic.relative}"));
-			if (Std.is(graphic, Text)) {
-				var text : Text = cast(graphic, Text);
-				trace(Std.format("Text: ${text.text}"));
-			}
-		}
 		if (graphic != null && graphic.visible) {
 			if (graphic.relative) {
 				_myPoint.x = x;

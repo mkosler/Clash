@@ -4,6 +4,7 @@ import com.haxepunk.World;
 import com.haxepunk.HXP;
 
 import clash.Button;
+import clash.Checkbox;
 
 class Test extends World 
 {
@@ -14,11 +15,17 @@ class Test extends World
 
 	public override function begin() : Void
 	{
-		add(new Button(HXP.halfWidth, HXP.halfHeight, "Test", ButtonCallback));
+		add(new Button(10, 50, "Press me!", ButtonCallback));
+		add(new Checkbox(10, 100, "Check me!", CheckboxCallback));
 	}
 
 	private function ButtonCallback() : Void
 	{
-		trace("In button callback");
+		trace("In ButtonCallback");
+	}
+
+	private function CheckboxCallback() : Void
+	{
+		trace("In CheckboxCallback");
 	}
 }
