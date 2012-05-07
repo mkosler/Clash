@@ -48,3 +48,5 @@ which will output a template `newskin.clashtemplate`.
 ### ClashBuilder GUI
 
 Using the GUI is more time-consuming, but it allows you to have more freedom when building your bitmaps. Here, you load up your bitmap into ClashBuilder, then are able to visually select and annotate areas to represent different elements of your skin. When done, simply export the information to create a new `.clash` file.
+
+*Clash is based off these [tutorials](http://active.tutsplus.com/tutorials/games/how-to-make-ui-components-for-flashpunk-games/), which we in turn based off the [PunkUI](http://flashpunk.net/forums/index.php?topic=1415.0) project for the [FlashPunk](http://flashpunk.net/) game engine.*
