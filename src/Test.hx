@@ -7,6 +7,7 @@ import clash.Button;
 import clash.Checkbox;
 import clash.RadioButton;
 import clash.TextInput;
+import clash.Handle;
 
 class Test extends World 
 {
@@ -27,6 +28,8 @@ class Test extends World
 
 		add(new TextInput(HXP.halfWidth, 100, false, "Single line!"));
 		add(new TextInput(HXP.halfWidth, 200, true, "Multiline!"));
+
+		add(new Handle(10, 300, 100, true));
 	}
 
 	private function ButtonCallback() : Void

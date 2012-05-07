@@ -58,7 +58,7 @@ class Button extends Entity
 	{
 		super.update();
 
-		if (collidePoint(x, y, Input.mouseX, Input.mouseY)) {
+		if (collidePoint(x, y, world.mouseX, world.mouseY)) {
 			if (Input.mousePressed) {
 				_clicked = true;
 			}
