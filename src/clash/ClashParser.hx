@@ -1,10 +1,16 @@
-package;
+package clash;
 
 import haxe.xml.Fast;
-import sys.io.File;
+// #if (flash || flash9)
+// import flash.xml.XML;
+// import nme.filesystem.File;
+// #else
+// import sys.io.File;
+// #end
+import clash.Clash;
 
-typedef ClashContainer = Hash<Hash<Dynamic>>;
-typedef Element = Hash<Dynamic>;
+// typedef ClashContainer = Hash<Hash<Dynamic>>;
+// typedef Element = Hash<Dynamic>;
 
 class ClashParser 
 {
@@ -28,9 +34,14 @@ class ClashParser
 	// 	_radios = new Element();
 	// }
 
-	public static function parse(path : String) : Void
+	public static function parse(path : String) : Clash
 	{
-		var clashXML : Fast = new Fast(Xml.parse(File.getContent(path)).firstElement());
+		var clashXML : Fast = new Fast(Xml.parse(path));
+// #if (flash || flash9)
+// 		var clashXML : Fast = new Fast(new XML(new File(path));
+// #else
+// 		var clashXML : Fast = new Fast(Xml.parse(File.getContent(path)).firstElement());
+// #end
 
 		parseHeader(clashXML);
 		
@@ -48,6 +59,7 @@ class ClashParser
 					throw Std.format("Unknown element type: ${element.att.name}");
 			}
 		}
+		return new Clash(_header, _images, [_buttons, _checkboxes, _radios]);
 	}
 
 	public static function print() : Void
@@ -176,8 +188,12 @@ $s");
 	private static function parseBool(s : String) : Bool
 	{
 		if (s == "true") return true;
+#if (flash || flash9)
+		else return false;
+#else
 		else if (s == "false") return false;
 		else return null;
+#end
 	}
 }
 

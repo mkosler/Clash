@@ -15,9 +15,9 @@ class Handle extends Button
 	private var _middle : TiledImage;
 	private var _rightEnd : Image;
 
-	public function new(x : Float, y : Float, length : Int, vertical : Bool = false, text : String = "", calling : Int -> Int = null)
+	public function new(x : Float, y : Float, length : Int, clash : Clash, vertical : Bool = false, text : String = "", calling : Int -> Int = null)
 	{
-		super(x, y, text);
+		super(x, y, clash, text);
 
 		var clipWidth : Int = 10;
 		var clipHeight : Int = 20;

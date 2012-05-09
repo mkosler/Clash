@@ -6,8 +6,9 @@ import com.haxepunk.graphics.Text;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import nme.events.KeyboardEvent;
+import clash.ClashElement;
 
-class TextInput extends Entity 
+class TextInput extends ClashElement 
 {
 	public var text(get_text, set_text) : String;
 	private var _text : String;
@@ -26,9 +27,9 @@ class TextInput extends Entity
 	private var _multiline : Bool;
 	public static var focus : TextInput;
 
-	public function new(x : Float = 0, y : Float = 0, multiline : Bool = false, text : String = "")
+	public function new(x : Float = 0, y : Float = 0, clash : Clash, multiline : Bool = false, text : String = "")
 	{
-		super(x, y);
+		super(x, y, clash);
 
 		textGraphic = new Text(text);
 		textGraphic.resizable = true;

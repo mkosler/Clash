@@ -8,8 +8,9 @@ import com.haxepunk.graphics.Text;
 import com.haxepunk.utils.Input;
 import nme.geom.Point;
 import nme.geom.Rectangle;
+import clash.ClashElement;
 
-class Button extends Entity 
+class Button extends ClashElement 
 {
 	private static inline var NORMAL : Int = 0;
 	private var _normal : Image;
@@ -29,9 +30,9 @@ class Button extends Entity
 	private var _myPoint : Point;
 	private var _myCamera : Point;
 
-	public function new(x : Float, y : Float, text : String = "", calling : Void -> Void = null)
+	public function new(x : Float, y : Float, clash : Clash, text : String = "", calling : Void -> Void = null)
 	{
-		super(x, y);
+		super(x, y, clash);
 
 		// At the moment, much of this is hardcoded for testing purposes
 		// TODO: grab the slicing information from the most recently added Skin class

@@ -15,9 +15,9 @@ class Checkbox extends Button
 
 	public var checked : Bool;
 
-	public function new(x : Float, y : Float, text : String = "", calling : Void -> Void = null)
+	public function new(x : Float, y : Float, clash : Clash, text : String = "", calling : Void -> Void = null)
 	{
-		super(x, y, text, calling);
+		super(x, y, clash, text, calling);
 
 		var clipWidth : Int = 20;
 		var clipHeight : Int = 20;

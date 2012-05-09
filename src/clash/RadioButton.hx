@@ -12,9 +12,9 @@ class RadioButton extends Checkbox
 	public var index : Int;
 	public var id : String;
 
-	public function new(x : Float, y : Float, group : RadioGroup, text : String = "", id : String = null)
+	public function new(x : Float, y : Float, group : RadioGroup, clash : Clash, text : String = "", id : String = null)
 	{
-		super(x, y, text);
+		super(x, y, clash, text);
 
 		if (id == null) {
 			this.id = text;
