@@ -1,0 +1,23 @@
+
+ClashBuilder Command Line Interface - Michael Kosler (http://www.github.com/mkosler)
+
+Usage: neko ClashBuilder.n [OPTIONS] [.clash file] {add : images}
+Brackets designate an optional argument. If add option is used, images go at the end of the
+arguments.
+
+Running with no options will load the GUI interface; otherwise, you must designate a .clash file
+to use the command line interface.
+
+Options:
+  add [images] : Adds new images to the current .clash file
+  clear        : Removes all linked images from the current .clash file
+  list         : Lists the currently linked images on the current .clash file
+  build        : Brings up an interactive CLI to hand build the .clash file
+  print        : Prettily prints the .clash file
+  gui          : Loads the GUI interface, and opens the current .clash file
+
+Examples:
+  neko ClashBuilder.n                         : Launches the GUI interface
+  neko ClashBuilder.n add test.clash test.png : Adds test.png to the test.clash
+  neko ClashBuilder.n clear test.clash        : Removes all linked images from test.clash
+  neko ClashBuilder.n gui test.clash          : Loads the GUI interface and opens test.clash

@@ -1,0 +1,3 @@
+-cp src/
+-main Main
+-neko ClashBuilder.n

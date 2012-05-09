@@ -35,15 +35,29 @@ ClashBuilder is a simple tool that allows for the creation new skins in two ways
 
 Following a template is the quickest way to get started with a new skin. A template is simply a previously mapped bitmap using ClashBuilder. As long as your bitmap follows the same structure as the template (i.e. the buttons are in the same position in their file, aligned the same way, in the same order, etc.), then making a new skin for Clash UI is very easy.
 
-So simple, that it can even be done using the command line. Here is an theoretical example:
+This portion can be done using the command line:
 
-	clashbuilder path/to/new/skin/bitmap template.clashtemplate
+	ClashBuilder Command Line Interface - Michael Kosler (http://www.github.com/mkosler)
 
-which will output an XML file: `newskin.clash` in the same directory as your bitmap. You can also create a new template from a pre-existing XML file:
+	Usage: neko ClashBuilder.n [OPTIONS] [.clash file] {add : images}
+	Brackets designate an optional argument. If add option is used, images go at the end of the
+	arguments.
 
-	clashbuilder new path/to/newskin.clash
+	Running with no options will load the GUI interface; otherwise, you must designate a .clash file
+	to use the command line interface.
 
-which will output a template `newskin.clashtemplate`.
+	Options:
+	  add [images] : Adds new images to the current .clash file
+	  clear        : Removes all linked images from the current .clash file
+	  list         : Lists the currently linked images on the current .clash file
+	  build        : brings up an interactive CLI to hand build the .clash file
+	  gui          : Loads the GUI interface, and opens the current .clash file
+
+	Examples:
+	  neko ClashBuilder.n                         : Launches the GUI interface
+	  neko ClashBuilder.n add test.clash test.png : Adds test.png to the test.clash
+	  neko ClashBuilder.n clear test.clash        : Removes all linked images from test.clash
+	  neko ClashBuilder.n gui test.clash          : Loads the GUI interface and opens test.clash
 
 ### ClashBuilder GUI
 

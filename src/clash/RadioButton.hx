@@ -41,7 +41,7 @@ class RadioButton extends Checkbox
 			new Rectangle(clipWidth * Checkbox.CHECKED, clipHeight * Button.DOWN, clipWidth, clipHeight));
 
 		graphic = _normal;
-		setHitbox(_normal.width + label.width, _normal.height);
+		setHitbox(_normal.width + _label.width, _normal.height);
 	}
 
 	private override function click() : Void

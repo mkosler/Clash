@@ -32,17 +32,17 @@ class Test extends World
 		add(new Handle(10, 300, 100, true));
 	}
 
-	private function ButtonCallback() : Void
+	private function ButtonCallback()
 	{
 		trace("In ButtonCallback");
 	}
 
-	private function CheckboxCallback() : Void
+	private function CheckboxCallback()
 	{
 		trace("In CheckboxCallback");
 	}
 
-	private function RadioCallback(id : String) : Void
+	private function RadioCallback(id)
 	{
 		trace(Std.format("In RadioCallback: ${id}"));
 	}

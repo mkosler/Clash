@@ -36,10 +36,10 @@ class Checkbox extends Button
 
 		graphic = _normal;
 
-		label.x = _normal.width + 5;
-		label.y = 0;
+		_label.x = _normal.width + 5;
+		_label.y = 0;
 
-		setHitbox(_normal.width + label.width, _normal.height);
+		setHitbox(_normal.width + _label.width, _normal.height);
 
 		checked = false;
 	}

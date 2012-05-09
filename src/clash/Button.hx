@@ -20,7 +20,7 @@ class Button extends Entity
 	private static inline var DOWN : Int = 2;
 	private var _down : Image;
 
-	private var label : Text;
+	private var _label : Text;
 
 	public var calling : Void -> Void;
 
@@ -44,9 +44,9 @@ class Button extends Entity
 		graphic = _normal;
 		setHitboxTo(graphic);
 
-		label = new Text(text);
-		label.x = (width - label.width) / 2;
-		label.y = (height - label.height) / 2;
+		_label = new Text(text);
+		_label.x = (width - _label.width) / 2;
+		_label.y = (height - _label.height) / 2;
 
 		this.calling = calling;
 		_clicked = false;
@@ -108,7 +108,7 @@ class Button extends Entity
 	{
 		super.render();
 
-		renderGraphic(label);
+		renderGraphic(_label);
 	}
 
 	private function renderGraphic(graphic : Graphic) : Void
