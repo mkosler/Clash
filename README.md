@@ -60,7 +60,7 @@ And that's all you need. No need to hard code dimensions of your images, or path
 
 This will change from the Default skin associated with the .clash file to the included Monochromatic skin.
 
-Included in this repository are three example skins - **Default, Monochromatic, and Wooden** - and their associated .clash file - **default.clash**. You can also download an **example** through the Download link here on Github, or [play the online Flash example here](http://dl.dropbox.com/u/49569739/ClashUIExample.swf) to see Clash UI working. To change between the three different skins, press 1 for *Default*, 2 for *Monochromatic*, and 3 for *Wooden*.
+Included in this repository are three example skins - **Default, Monochromatic, and Wooden** - and their associated .clash file - **default.clash**. You can also download an **example** through the Download link here on Github, or [play the online Flash example here](http://bit.ly/Lpm4Md) to see Clash UI working. To change between the three different skins, press 1 for *Default*, 2 for *Monochromatic*, and 3 for *Wooden*.
 
 ## ClashBuilder
 
