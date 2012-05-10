@@ -6,6 +6,7 @@ import nme.geom.Rectangle;
 import clash.Button;
 import clash.Checkbox;
 import clash.data.Clash;
+import clash.data.ClashStyle;
 
 class RadioButton extends Checkbox 
 {
@@ -13,9 +14,9 @@ class RadioButton extends Checkbox
 	public var index : Int;
 	public var id : String;
 
-	public function new(x : Float, y : Float, group : RadioGroup, clash : Clash, text : String = "", id : String = null)
+	public function new(x : Float, y : Float, group : RadioGroup, clash : Clash, style : String = "Default", text : String = "", id : String = null)
 	{
-		super(x, y, clash, text);
+		super(x, y, clash, style, text);
 
 		if (id == null) {
 			this.id = text;
@@ -26,20 +27,17 @@ class RadioButton extends Checkbox
 		this.group = group;
 		this.group.add(this);
 
-		var clipWidth : Int = 20;
-		var clipHeight : Int = 20;
-		_normal = new Image("gfx/testing/radiobutton.png",
-			new Rectangle(clipWidth * Button.NORMAL, clipHeight * Button.NORMAL, clipWidth, clipHeight));
-		_hover = new Image("gfx/testing/radiobutton.png",
-			new Rectangle(clipWidth * Button.NORMAL, clipHeight * Button.HOVER, clipWidth, clipHeight));
-		_down = new Image("gfx/testing/radiobutton.png",
-			new Rectangle(clipWidth * Button.NORMAL, clipHeight * Button.DOWN, clipWidth, clipHeight));
-		_normalChecked = new Image("gfx/testing/radiobutton.png",
-			new Rectangle(clipWidth * Checkbox.CHECKED, clipHeight * Button.NORMAL, clipWidth, clipHeight));
-		_hoverChecked = new Image("gfx/testing/radiobutton.png",
-			new Rectangle(clipWidth * Checkbox.CHECKED, clipHeight * Button.HOVER, clipWidth, clipHeight));
-		_downChecked = new Image("gfx/testing/radiobutton.png",
-			new Rectangle(clipWidth * Checkbox.CHECKED, clipHeight * Button.DOWN, clipWidth, clipHeight));
+		var currentStyle : ClashStyle = clash.getElement("Radio").getStyle(style);
+		_normalRect = makeSliceRectangle(currentStyle.getSlice("Normal"));
+		_normalCheckedRect = makeSliceRectangle(currentStyle.getSlice("Normal", true));
+
+		_hoverRect = makeSliceRectangle(currentStyle.getSlice("Hover"));
+		_hoverCheckedRect = makeSliceRectangle(currentStyle.getSlice("Hover", true));
+
+		_downRect = makeSliceRectangle(currentStyle.getSlice("Down"));
+		_downCheckedRect = makeSliceRectangle(currentStyle.getSlice("Down", true));
+
+		reskin(clash.getCurrentImage());
 
 		graphic = _normal;
 		setHitbox(_normal.width + _label.width, _normal.height);

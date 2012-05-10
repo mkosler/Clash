@@ -30,10 +30,10 @@ class Test extends World
 
 		add(new Checkbox(10, 100, currentClash, "Default", "Check me!", CheckboxCallback));
 
-		// var group1 : RadioGroup = new RadioGroup(RadioCallback);
-		// add(new RadioButton(10, 150, group1, currentClash, "Default", "Number 1!"));
-		// add(new RadioButton(10, 175, group1, currentClash, "Default", "Number 2!"));
-		// add(new RadioButton(10, 200, group1, currentClash, "Default",  "Number 3!"));
+		var group1 : RadioGroup = new RadioGroup(RadioCallback);
+		add(new RadioButton(10, 150, group1, currentClash, "Default", "Number 1!"));
+		add(new RadioButton(10, 175, group1, currentClash, "Default", "Number 2!"));
+		add(new RadioButton(10, 200, group1, currentClash, "Default", "Number 3!"));
 
 		// add(new TextInput(HXP.halfWidth, 100, false, "Single line!"));
 		// add(new TextInput(HXP.halfWidth, 200, true, "Multiline!"));
