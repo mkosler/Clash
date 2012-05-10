@@ -28,7 +28,7 @@ class Test extends World
 	{
 		add(new Button(10, 50, currentClash, "Default", "Press me!", ButtonCallback));
 
-		// add(new Checkbox(10, 100, currentClash, "Default", "Check me!", CheckboxCallback));
+		add(new Checkbox(10, 100, currentClash, "Default", "Check me!", CheckboxCallback));
 
 		// var group1 : RadioGroup = new RadioGroup(RadioCallback);
 		// add(new RadioButton(10, 150, group1, currentClash, "Default", "Number 1!"));

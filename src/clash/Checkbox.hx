@@ -5,35 +5,37 @@ import com.haxepunk.graphics.Text;
 import nme.geom.Rectangle;
 import clash.Button;
 import clash.data.Clash;
+import clash.data.ClashImage;
+import clash.data.ClashStyle;
 
 class Checkbox extends Button
 {
 	private static inline var CHECKED : Int = 1;
 
 	private var _normalChecked : Image;
+	private var _normalCheckedRect : Rectangle;
 	private var _hoverChecked : Image;
+	private var _hoverCheckedRect : Rectangle;
 	private var _downChecked : Image;
+	private var _downCheckedRect : Rectangle;
 
 	public var checked : Bool;
 
-	public function new(x : Float, y : Float, clash : Clash, text : String = "", calling : Void -> Void = null)
+	public function new(x : Float, y : Float, clash : Clash, style : String = "Default", text : String = "", calling : Void -> Void = null)
 	{
-		super(x, y, clash, text, calling);
+		super(x, y, clash, style, text, calling);
 
-		var clipWidth : Int = 20;
-		var clipHeight : Int = 20;
-		_normal = new Image("gfx/testing/checkbox.png",
-			new Rectangle(clipWidth * Button.NORMAL, clipHeight * Button.NORMAL, clipWidth, clipHeight));
-		_hover = new Image("gfx/testing/checkbox.png",
-			new Rectangle(clipWidth * Button.NORMAL, clipHeight * Button.HOVER, clipWidth, clipHeight));
-		_down = new Image("gfx/testing/checkbox.png",
-			new Rectangle(clipWidth * Button.NORMAL, clipHeight * Button.DOWN, clipWidth, clipHeight));
-		_normalChecked = new Image("gfx/testing/checkbox.png",
-			new Rectangle(clipWidth * CHECKED, clipHeight * Button.NORMAL, clipWidth, clipHeight));
-		_hoverChecked = new Image("gfx/testing/checkbox.png",
-			new Rectangle(clipWidth * CHECKED, clipHeight * Button.HOVER, clipWidth, clipHeight));
-		_downChecked = new Image("gfx/testing/checkbox.png",
-			new Rectangle(clipWidth * CHECKED, clipHeight * Button.DOWN, clipWidth, clipHeight));
+		var currentStyle : ClashStyle = clash.getElement("Checkbox").getStyle(style);
+		_normalRect = makeSliceRectangle(currentStyle.getSlice("Normal"));
+		_normalCheckedRect = makeSliceRectangle(currentStyle.getSlice("Normal", true));
+
+		_hoverRect = makeSliceRectangle(currentStyle.getSlice("Hover"));
+		_hoverCheckedRect = makeSliceRectangle(currentStyle.getSlice("Hover", true));
+		
+		_downRect = makeSliceRectangle(currentStyle.getSlice("Down"));
+		_downCheckedRect = makeSliceRectangle(currentStyle.getSlice("Down", true));
+
+		reskin(clash.getCurrentImage());
 
 		graphic = _normal;
 
@@ -66,5 +68,14 @@ class Checkbox extends Button
 		} else {
 			super.changeState(state);
 		}
+	}
+
+	public override function reskin(image : ClashImage) : Void
+	{
+		_normalChecked = new Image(image.path, _normalCheckedRect);
+		_hoverChecked = new Image(image.path, _hoverCheckedRect);
+		_downChecked = new Image(image.path, _downCheckedRect);
+
+		super.reskin(image);
 	}
 }

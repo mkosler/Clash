@@ -35,9 +35,6 @@ class Button extends ClashWidget
 
 	private var _clicked : Bool;
 
-	private var _myPoint : Point;
-	private var _myCamera : Point;
-
 	public function new(x : Float, y : Float, clash : Clash, style : String = "Default", text : String = "", calling : Void -> Void = null)
 	{
 		super(x, y, clash, style);
@@ -60,11 +57,6 @@ class Button extends ClashWidget
 		_clicked = false;
 		_myPoint = HXP.point;
 		_myCamera = HXP.point2;
-	}
-
-	private function makeSliceRectangle(slice : ClashSlice) : Rectangle
-	{
-		return new Rectangle(slice.x, slice.y, slice.width, slice.height);
 	}
 
 	public override function update() : Void
@@ -122,21 +114,6 @@ class Button extends ClashWidget
 		super.render();
 
 		renderGraphic(_label);
-	}
-
-	private function renderGraphic(graphic : Graphic) : Void
-	{
-		if (graphic != null && graphic.visible) {
-			if (graphic.relative) {
-				_myPoint.x = x;
-				_myPoint.y = y;
-			} else {
-				_myPoint.x = _myPoint.y = 0;
-			}
-			_myCamera.x = world != null ? world.camera.x : HXP.camera.x;
-			_myCamera.y = world != null ? world.camera.y : HXP.camera.y;
-			graphic.render(renderTarget != null ? renderTarget : HXP.buffer, _myPoint, _myCamera);
-		}
 	}
 
 	public override function reskin(image : ClashImage) : Void 
