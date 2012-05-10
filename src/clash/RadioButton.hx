@@ -5,6 +5,7 @@ import com.haxepunk.graphics.Text;
 import nme.geom.Rectangle;
 import clash.Button;
 import clash.Checkbox;
+import clash.data.Clash;
 
 class RadioButton extends Checkbox 
 {
@@ -46,8 +47,6 @@ class RadioButton extends Checkbox
 
 	private override function click() : Void
 	{
-		trace("In RadioButton.Click");
-		
 		group.click(this, id);
 	}
 

@@ -8,18 +8,26 @@ import com.haxepunk.graphics.Text;
 import com.haxepunk.utils.Input;
 import nme.geom.Point;
 import nme.geom.Rectangle;
-import clash.ClashElement;
+import clash.ClashWidget;
+import clash.data.Clash;
+import clash.data.ClashParser;
+import clash.data.ClashImage;
+import clash.data.ClashSlice;
+import clash.data.ClashStyle;
 
-class Button extends ClashElement 
+class Button extends ClashWidget 
 {
 	private static inline var NORMAL : Int = 0;
 	private var _normal : Image;
+	private var _normalRect : Rectangle;
 
 	private static inline var HOVER : Int = 1;
 	private var _hover : Image;
+	private var _hoverRect : Rectangle;
 
 	private static inline var DOWN : Int = 2;
 	private var _down : Image;
+	private var _downRect : Rectangle;
 
 	private var _label : Text;
 
@@ -30,17 +38,16 @@ class Button extends ClashElement
 	private var _myPoint : Point;
 	private var _myCamera : Point;
 
-	public function new(x : Float, y : Float, clash : Clash, text : String = "", calling : Void -> Void = null)
+	public function new(x : Float, y : Float, clash : Clash, style : String = "Default", text : String = "", calling : Void -> Void = null)
 	{
-		super(x, y, clash);
+		super(x, y, clash, style);
 
-		// At the moment, much of this is hardcoded for testing purposes
-		// TODO: grab the slicing information from the most recently added Skin class
-		var clipWidth : Int = 75;
-		var clipHeight : Int = 30;
-		_normal = new Image("gfx/testing/button.png", new Rectangle(0, clipHeight * NORMAL, clipWidth, clipHeight));
-		_hover = new Image("gfx/testing/button.png", new Rectangle(0, clipHeight * HOVER, clipWidth, clipHeight));
-		_down = new Image("gfx/testing/button.png", new Rectangle(0, clipHeight * DOWN, clipWidth, clipHeight));
+		var currentStyle : ClashStyle = clash.getElement("Button").getStyle(style);
+		_normalRect = makeSliceRectangle(currentStyle.getSlice("Normal"));
+		_hoverRect  = makeSliceRectangle(currentStyle.getSlice("Hover"));
+		_downRect   = makeSliceRectangle(currentStyle.getSlice("Down"));
+
+		reskin(clash.getCurrentImage());
 
 		graphic = _normal;
 		setHitboxTo(graphic);
@@ -53,6 +60,11 @@ class Button extends ClashElement
 		_clicked = false;
 		_myPoint = HXP.point;
 		_myCamera = HXP.point2;
+	}
+
+	private function makeSliceRectangle(slice : ClashSlice) : Rectangle
+	{
+		return new Rectangle(slice.x, slice.y, slice.width, slice.height);
 	}
 
 	public override function update() : Void
@@ -125,5 +137,12 @@ class Button extends ClashElement
 			_myCamera.y = world != null ? world.camera.y : HXP.camera.y;
 			graphic.render(renderTarget != null ? renderTarget : HXP.buffer, _myPoint, _myCamera);
 		}
+	}
+
+	public override function reskin(image : ClashImage) : Void 
+	{
+		_normal = new Image(image.path, _normalRect);
+		_hover = new Image(image.path, _hoverRect);
+		_down = new Image(image.path, _downRect);
 	}
 }

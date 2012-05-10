@@ -6,6 +6,7 @@ import com.haxepunk.graphics.TiledImage;
 import com.haxepunk.utils.Input;
 import nme.geom.Rectangle;
 import clash.Button;
+import clash.data.Clash;
 
 class Handle extends Button
 {

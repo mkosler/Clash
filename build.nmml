@@ -17,6 +17,7 @@
 	<assets path="assets/sfx" rename="sfx" type="sound" include="*.wav" />
 	<assets path="assets/music" rename="music" type="music" include="*.mp3" />
 	<assets path="assets/font" rename="font" type="font" include="*.ttf" />
+	<assets path="assets/clash" rename="clash" type="clash" include="*.clash" />
 
 	<ndll name="std" />
 	<ndll name="regexp" />

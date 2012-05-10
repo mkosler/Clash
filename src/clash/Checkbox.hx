@@ -4,6 +4,7 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
 import nme.geom.Rectangle;
 import clash.Button;
+import clash.data.Clash;
 
 class Checkbox extends Button
 {

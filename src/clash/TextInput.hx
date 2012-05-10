@@ -6,9 +6,10 @@ import com.haxepunk.graphics.Text;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import nme.events.KeyboardEvent;
-import clash.ClashElement;
+import clash.ClashWidget;
+import clash.data.Clash;
 
-class TextInput extends ClashElement 
+class TextInput extends ClashWidget 
 {
 	public var text(get_text, set_text) : String;
 	private var _text : String;
