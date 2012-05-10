@@ -1,10 +1,11 @@
 package clash;
 
-import com.haxepunk.graphics.Graphiclist;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.TiledImage;
 import com.haxepunk.utils.Input;
+
 import nme.geom.Rectangle;
+
 import clash.Button;
 import clash.data.Clash;
 

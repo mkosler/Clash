@@ -3,7 +3,6 @@ package clash.data;
 class ClashElement 
 {
 	public var name(default, null) : String;
-	private var _styles : Hash<ClashStyle>;
 
 	public function new(name : String, styles : Array<ClashStyle>)
 	{
@@ -32,4 +31,6 @@ class ClashElement
 		}
 		return Std.format("$self\n$styles");
 	}
+
+	private var _styles : Hash<ClashStyle>;
 }

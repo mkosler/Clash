@@ -8,10 +8,6 @@ class Clash
 	public var name(default, null) : String;
 	public var width(default, null) : Int;
 	public var height(default, null) : Int;
-	private var _images : Hash<ClashImage>;
-	private var _currentImage : ClashImage;
-	private var _elements : Hash<ClashElement>;
-	private var _widgets : Array<ClashWidget>;
 
 	public function new(version : String, name : String, width : Int, height : Int, images : Array<ClashImage>, elements : Array<ClashElement>, currentImage : String = "Default")
 	{
@@ -33,13 +29,14 @@ class Clash
 		_widgets = new Array<ClashWidget>();
 	}
 
-	public function getImage(name : String) : ClashImage
+	public function addWidget(widget : ClashWidget) : Int
 	{
-		if (_images.exists(name)) return _images.get(name);
-		else {
-			trace("Unknown image name: " + name);
-			return null;
-		}
+		return _widgets.push(widget);
+	}
+
+	public function getCurrentImage() : ClashImage
+	{
+		return _currentImage;
 	}
 
 	public function getElement(name : String) : ClashElement
@@ -51,9 +48,18 @@ class Clash
 		}
 	}
 
-	public function getCurrentImage() : ClashImage
+	public function getImage(name : String) : ClashImage
 	{
-		return _currentImage;
+		if (_images.exists(name)) return _images.get(name);
+		else {
+			trace("Unknown image name: " + name);
+			return null;
+		}
+	}
+
+	public function removeWidget(index : Int) : Void
+	{
+		_widgets.splice(index, 1);
 	}
 
 	public function setCurrentImage(name : String) : Void
@@ -64,13 +70,8 @@ class Clash
 		}
 	}
 
-	public function addWidget(widget : ClashWidget) : Int
-	{
-		return _widgets.push(widget);
-	}
-
-	public function removeWidget(index : Int) : Void
-	{
-		_widgets.splice(index, 1);
-	}
+	private var _images : Hash<ClashImage>;	
+	private var _currentImage : ClashImage;
+	private var _elements : Hash<ClashElement>;
+	private var _widgets : Array<ClashWidget>;
 }

@@ -2,8 +2,9 @@ package clash;
 
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
+
 import nme.geom.Rectangle;
-import clash.Button;
+
 import clash.Checkbox;
 import clash.data.Clash;
 import clash.data.ClashStyle;
@@ -18,11 +19,7 @@ class RadioButton extends Checkbox
 	{
 		super(x, y, clash, style, text);
 
-		if (id == null) {
-			this.id = text;
-		} else {
-			this.id = id;
-		}
+		this.id = (id == null ? text : id);
 
 		this.group = group;
 		this.group.add(this);
@@ -43,31 +40,26 @@ class RadioButton extends Checkbox
 		setHitbox(_normal.width + _label.width, _normal.height);
 	}
 
-	private override function click() : Void
-	{
-		group.click(this, id);
-	}
-
 	public override function removed() : Void
 	{
 		super.removed();
 
 		group.remove(this);
 	}
+
+	private override function click() : Void
+	{
+		group.click(this, id);
+	}
 }
 
 class RadioGroup 
 {
-	private var _buttons : Array<RadioButton>;
 	public var calling : String -> Void;
 
 	public function new(buttons : Array<RadioButton> = null, calling : String -> Void = null)
 	{
-		if (buttons != null) {
-			_buttons = buttons;
-		} else {
-			_buttons = new Array<RadioButton>();
-		}
+		_buttons = (buttons != null ? buttons : new Array<RadioButton>());
 
 		this.calling = calling;
 	}
@@ -86,34 +78,6 @@ class RadioGroup
 		}
 	}
 
-	public function remove(button : RadioButton) : RadioButton
-	{
-		for (i in button.index..._buttons.length) {
-			_buttons[i].index -= 1;
-		}
-		_buttons.splice(button.index, 1);
-		button.group = null;
-		button.index = -1;
-		return button;
-	}
-
-	public function removeArray(buttons : Array<RadioButton>) : Void
-	{
-		for (button in buttons) {
-			remove(button);
-		}
-	}
-
-	public function removeAll() : Void
-	{
-		removeArray(_buttons);
-	}
-
-	public function getAt(index : Int) : RadioButton
-	{
-		return _buttons[index];
-	}
-
 	public function click(target : RadioButton, id : String) : Void
 	{
 		for (button in _buttons) {
@@ -125,4 +89,34 @@ class RadioGroup
 			calling(id);
 		}
 	}
+
+	public function getAt(index : Int) : RadioButton
+	{
+		return _buttons[index];
+	}
+
+	public function remove(button : RadioButton) : RadioButton
+	{
+		for (i in button.index..._buttons.length) {
+			_buttons[i].index -= 1;
+		}
+		_buttons.splice(button.index, 1);
+		button.group = null;
+		button.index = -1;
+		return button;
+	}
+
+	public function removeAll() : Void
+	{
+		removeArray(_buttons);
+	}
+
+	public function removeArray(buttons : Array<RadioButton>) : Void
+	{
+		for (button in buttons) {
+			remove(button);
+		}
+	}
+
+	private var _buttons : Array<RadioButton>;
 }

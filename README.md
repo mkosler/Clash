@@ -16,7 +16,7 @@ Currently, Clash consists of:
 - Radio Button;
 - Text Input (single line or multiline);
 
-### Future Elements
+### Future Widgets
 
 - Scrollable Text Fields;
 - Listbox;
@@ -24,6 +24,43 @@ Currently, Clash consists of:
 - Handle;
 - Dial;
 - *and much more...*
+
+### Using Clash UI => Getting Started
+
+Using Clash UI in your project is fairly simple, with added simplicity coming down the pipeline in future updates. Currently, you will need to have a full copy of the Clash UI source code (src/ in this Github repository) included in your project.
+
+Additionally, you will need to add the following line to your build.nmml file:
+
+	<assets path="assets/CLASH_DIR" rename="clash" type="clash" include="*.clash" />
+
+Change `CLASH_DIR` to the path to your .clash files inside your assets directory. This allows non-native (Flash/JS) NME targets to have access to the .clash files.
+
+Finally, in the world in which you want your Clash UI widgets to appear, create a private variable and initialize it using ClashParser.
+
+	import clash.data.Clash;
+	import clash.data.ClashParser;
+	import clash.Button;
+	// ...
+
+	class TestWorld extends World
+	{
+		private var clash : Clash;
+
+		public function new()
+		{
+			clash = ClashBuilder.parse("CLASH_DIR/default.clash");
+			add(new Button(50, 50, clash, "Default", "Clash Button"));
+			// ...
+		}
+	}
+
+And that's all you need. No need to hard code dimensions of your images, or paths, or figure out the clipRect for an individual element from a larger sheet. Clash does the tedious work for you. You can also easily switch between different images (associated with that particular .clash file) easily:
+
+	clash.setCurrentImage("Monochromatic");
+
+This will change from the Default skin associated with the .clash file to the included Monochromatic skin.
+
+Included in this repository are three example skins - **Default, Monochromatic, and Wooden** - and their associated .clash file - **default.clash**. You can also download an **example** through the Download link here on Github, or [play the online Flash example here](http://dl.dropbox.com/u/49569739/ClashUIExample.swf) to see Clash UI working. To change between the three different skins, press 1 for *Default*, 2 for *Monochromatic*, and 3 for *Wooden*.
 
 ## ClashBuilder
 

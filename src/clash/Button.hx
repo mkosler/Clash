@@ -6,8 +6,9 @@ import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
 import com.haxepunk.utils.Input;
-import nme.geom.Point;
+
 import nme.geom.Rectangle;
+
 import clash.ClashWidget;
 import clash.data.Clash;
 import clash.data.ClashParser;
@@ -17,23 +18,7 @@ import clash.data.ClashStyle;
 
 class Button extends ClashWidget 
 {
-	private static inline var NORMAL : Int = 0;
-	private var _normal : Image;
-	private var _normalRect : Rectangle;
-
-	private static inline var HOVER : Int = 1;
-	private var _hover : Image;
-	private var _hoverRect : Rectangle;
-
-	private static inline var DOWN : Int = 2;
-	private var _down : Image;
-	private var _downRect : Rectangle;
-
-	private var _label : Text;
-
 	public var calling : Void -> Void;
-
-	private var _clicked : Bool;
 
 	public function new(x : Float, y : Float, clash : Clash, style : String = "Default", text : String = "", calling : Void -> Void = null)
 	{
@@ -54,9 +39,22 @@ class Button extends ClashWidget
 		_label.y = (height - _label.height) / 2;
 
 		this.calling = calling;
+		
 		_clicked = false;
-		_myPoint = HXP.point;
-		_myCamera = HXP.point2;
+	}
+
+	public override function render() : Void
+	{
+		super.render();
+
+		renderGraphic(_label);
+	}
+
+	public override function reskin(image : ClashImage) : Void 
+	{
+		_normal = new Image(image.path, _normalRect);
+		_hover = new Image(image.path, _hoverRect);
+		_down = new Image(image.path, _downRect);
 	}
 
 	public override function update() : Void
@@ -90,13 +88,6 @@ class Button extends ClashWidget
 		}
 	}
 
-	private function click() : Void 
-	{
-		if (calling != null) {
-			calling();
-		}
-	}
-
 	private function changeState(state : Int = 0)
 	{
 		switch (state) {
@@ -107,19 +98,25 @@ class Button extends ClashWidget
 			case DOWN:
 				graphic = _down;
 		}
+
 	}
 
-	public override function render() : Void
+	private function click() : Void 
 	{
-		super.render();
-
-		renderGraphic(_label);
+		if (calling != null) {
+			calling();
+		}
 	}
-
-	public override function reskin(image : ClashImage) : Void 
-	{
-		_normal = new Image(image.path, _normalRect);
-		_hover = new Image(image.path, _hoverRect);
-		_down = new Image(image.path, _downRect);
-	}
+	
+	private static inline var NORMAL : Int = 0;
+	private var _normal : Image;
+	private var _normalRect : Rectangle;
+	private static inline var HOVER : Int = 1;
+	private var _hover : Image;
+	private var _hoverRect : Rectangle;
+	private static inline var DOWN : Int = 2;
+	private var _down : Image;
+	private var _downRect : Rectangle;
+	private var _label : Text;
+	private var _clicked : Bool;
 }

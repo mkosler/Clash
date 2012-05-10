@@ -3,8 +3,10 @@ package clash;
 import com.haxepunk.Entity;
 import com.haxepunk.Graphic;
 import com.haxepunk.HXP;
+
 import nme.geom.Point;
 import nme.geom.Rectangle;
+
 import clash.data.Clash;
 import clash.data.ClashImage;
 import clash.data.ClashSlice;
@@ -12,11 +14,6 @@ import clash.data.ClashSlice;
 class ClashWidget extends Entity 
 {
 	public var clash : Clash;
-	private var _style : String;
-	private var _clashIndex : Int;
-
-	private var _myPoint : Point;
-	private var _myCamera : Point;
 
 	public function new(x : Float, y : Float, clash : Clash, style : String = "Default")
 	{
@@ -25,6 +22,9 @@ class ClashWidget extends Entity
 		_style = style;
 		_clashIndex = clash.addWidget(this);
 		this.clash = clash;
+
+		_myPoint = HXP.point;
+		_myCamera = HXP.point2;
 	}
 
 	public override function removed() : Void
@@ -37,6 +37,11 @@ class ClashWidget extends Entity
 	public function reskin(image : ClashImage) : Void
 	{
 		
+	}
+
+	private function makeSliceRectangle(slice : ClashSlice) : Rectangle
+	{
+		return new Rectangle(slice.x, slice.y, slice.width, slice.height);
 	}
 
 	private function renderGraphic(graphic : Graphic) : Void
@@ -54,8 +59,8 @@ class ClashWidget extends Entity
 		}
 	}
 
-	private function makeSliceRectangle(slice : ClashSlice) : Rectangle
-	{
-		return new Rectangle(slice.x, slice.y, slice.width, slice.height);
-	}
+	private var _style : String;
+	private var _clashIndex : Int;
+	private var _myPoint : Point;	
+	private var _myCamera : Point;
 }

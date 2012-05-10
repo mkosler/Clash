@@ -26,15 +26,6 @@ class ClashParser
 		return new Clash(version, name, width, height, parseImages(clashXML), parseElements(clashXML));
 	}
 
-	private static function parseImages(node : Fast) : Array<ClashImage>
-	{
-		var images : Array<ClashImage> = new Array<ClashImage>();
-		for (image in node.nodes.image) {
-			images.push(new ClashImage(image.att.name, image.att.path));
-		}
-		return images;
-	}
-
 	private static function parseElements(node : Fast) : Array<ClashElement>
 	{
 		if (!node.hasNode.element) {
@@ -47,23 +38,13 @@ class ClashParser
 		return elements;
 	}
 
-	private static function parseStyles(node : Fast) : Array<ClashStyle>
+	private static function parseImages(node : Fast) : Array<ClashImage>
 	{
-		if (!node.hasNode.style) {
-			throw "Missing styles: each element must have at least one (a default) style";
+		var images : Array<ClashImage> = new Array<ClashImage>();
+		for (image in node.nodes.image) {
+			images.push(new ClashImage(image.att.name, image.att.path));
 		}
-		var styles : Array<ClashStyle> = new Array<ClashStyle>();
-		for (style in node.nodes.style) {
-			styles.push(
-				new ClashStyle(
-					style.att.name,
-					Std.parseFloat(style.att.x),
-					Std.parseFloat(style.att.y),
-					Std.parseInt(style.att.width),
-					Std.parseInt(style.att.width),
-					parseSlices(style)));
-		}
-		return styles;
+		return images;
 	}
 
 	private static function parseSlices(node : Fast) : Array<ClashSlice>
@@ -93,5 +74,24 @@ class ClashParser
 			}
 		}
 		return slices;
+	}
+
+	private static function parseStyles(node : Fast) : Array<ClashStyle>
+	{
+		if (!node.hasNode.style) {
+			throw "Missing styles: each element must have at least one (a default) style";
+		}
+		var styles : Array<ClashStyle> = new Array<ClashStyle>();
+		for (style in node.nodes.style) {
+			styles.push(
+				new ClashStyle(
+					style.att.name,
+					Std.parseFloat(style.att.x),
+					Std.parseFloat(style.att.y),
+					Std.parseInt(style.att.width),
+					Std.parseInt(style.att.width),
+					parseSlices(style)));
+		}
+		return styles;
 	}
 }

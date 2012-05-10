@@ -7,7 +7,6 @@ class ClashStyle
 	public var y(default, null) : Float;
 	public var width(default, null) : Int;
 	public var height(default, null) : Int;
-	private var _slices : Hash<ClashSlice>;
 
 	public function new(name : String, x : Float, y : Float, width : Int, height : Int, slices : Array<ClashSlice>)
 	{
@@ -43,4 +42,6 @@ class ClashStyle
 		}
 		return Std.format("$self\n$slices");
 	}
+
+	private var _slices : Hash<ClashSlice>;
 }
