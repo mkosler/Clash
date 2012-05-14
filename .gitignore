@@ -1,4 +1,6 @@
 bin/
+content/
 build.build
 *.html
 *.n
+*.swf

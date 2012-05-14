@@ -1,9 +1,18 @@
 package clash.data;
 
+/**
+ * The element/widget data object for the Clash data object
+ */
 class ClashElement 
 {
+	/**
+	 * @private
+	 */
 	public var name(default, null) : String;
 
+	/**
+	 * @private
+	 */
 	public function new(name : String, styles : Array<ClashStyle>)
 	{
 		this.name = name;
@@ -13,6 +22,9 @@ class ClashElement
 		}
 	}
 
+	/**
+	 * @private
+	 */
 	public function getStyle(name : String) : ClashStyle
 	{
 		if (_styles.exists(name)) return _styles.get(name);
@@ -22,6 +34,9 @@ class ClashElement
 		}
 	}
 
+	/**
+	 * @private
+	 */
 	public function toString() : String
 	{
 		var self : String = Std.format("{name => $name}");

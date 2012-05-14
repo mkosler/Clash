@@ -1,13 +1,38 @@
 package clash.data;
 
+/**
+ * The style (for different visual representations of a single Clash UI widget) data object for the Clash data object
+ */
 class ClashStyle 
 {
+	/**
+	 * @private
+	 */
 	public var name(default, null) : String;
+
+	/**
+	 * @private
+	 */
 	public var x(default, null) : Float;
+
+	/**
+	 * @private
+	 */
 	public var y(default, null) : Float;
+
+	/**
+	 * @private
+	 */
 	public var width(default, null) : Int;
+
+	/**
+	 * @private
+	 */
 	public var height(default, null) : Int;
 
+	/**
+	 * @private
+	 */
 	public function new(name : String, x : Float, y : Float, width : Int, height : Int, slices : Array<ClashSlice>)
 	{
 		this.name = name;
@@ -22,6 +47,9 @@ class ClashStyle
 		}
 	}
 
+	/**
+	 * @private
+	 */
 	public function getSlice(name : String, checked : Bool = false) : ClashSlice
 	{
 		if (_slices.exists(name)) {
@@ -33,6 +61,9 @@ class ClashStyle
 		}
 	}
 
+	/**
+	 * @private
+	 */
 	public function toString() : String
 	{
 		var self : String = Std.format("{name => $name, x => $x, y => $y, width => $width, height => $height}");

@@ -8,8 +8,16 @@ import sys.io.File;
 #end
 import clash.data.Clash;
 
+/**
+ * A static object that parses the .clash files for the Clash data object
+ */
 class ClashParser 
 {
+	/**
+	 * Parse the .clash file into a Clash data object
+	 * @param path Path to the .clash file
+	 * @return A new Clash data object
+	 */
 	public static function parse(path : String) : Clash
 	{
 #if nme

@@ -11,10 +11,23 @@ import clash.data.Clash;
 import clash.data.ClashImage;
 import clash.data.ClashSlice;
 
+/**
+ * The Clash UI widget superclass
+ */
 class ClashWidget extends Entity 
 {
+	/**
+	 * The currently associated Clash data object
+	 */
 	public var clash : Clash;
 
+	/**
+	 * Constructor. You do not call this directly; rather individual widgets will call this in their constructors
+	 * @param x 		X coordinate of the widget
+	 * @param y 		Y coordinate of the widget
+	 * @param clash 	Clash data object
+	 * @param style 	Specifies the style, found in the Clash data object, to use. If none provided, use the "Default" style
+	 */
 	public function new(x : Float, y : Float, clash : Clash, style : String = "Default")
 	{
 		super(x, y);
@@ -34,6 +47,10 @@ class ClashWidget extends Entity
 		clash.removeWidget(_clashIndex);
 	}
 
+	/**
+	 * Applies a new skin to the widget; called automatically when clash.setCurrentImage() is called
+	 * @param 			image The new ClashImage to reskin the widget to
+	 */
 	public function reskin(image : ClashImage) : Void
 	{
 		
