@@ -37,7 +37,7 @@ class Test extends World
 		// add(new TextInput(HXP.halfWidth, 100, false, "Single line!"));
 		// add(new TextInput(HXP.halfWidth, 200, true, "Multiline!"));
 
-		add(new Handle(10, 300, 100, _currentClash, true));
+		add(new Handle(10, 300, 100, _currentClash));
 	}
 
 	public override function update() : Void

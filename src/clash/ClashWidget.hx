@@ -56,6 +56,11 @@ class ClashWidget extends Entity
 		
 	}
 
+	private function clamp(value : Float, lower : Float, upper : Float) : Float
+	{
+		return Math.min(Math.max(value, lower), upper);
+	}
+
 	private function makeSliceRectangle(slice : ClashSlice) : Rectangle
 	{
 		return new Rectangle(slice.x, slice.y, slice.width, slice.height);
