@@ -4,3 +4,5 @@ build.build
 *.html
 *.n
 *.swf
+docs.hxml
+output.xml
