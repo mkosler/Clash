@@ -25,6 +25,7 @@ class Button extends ClashWidget
 		super(x, y, clash, style);
 
 		var currentStyle : ClashStyle = clash.getElement("Button").getStyle(style);
+		trace(Std.format("currentStyle = ${currentStyle}"));
 		_normalRect = makeSliceRectangle(currentStyle.getSlice("Normal"));
 		_hoverRect  = makeSliceRectangle(currentStyle.getSlice("Hover"));
 		_downRect   = makeSliceRectangle(currentStyle.getSlice("Down"));

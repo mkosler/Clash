@@ -11,7 +11,7 @@
 		</style>
 	</element>
 	<element name="Checkbox">
-		<style name="Default" x="75" y="0" width="20" height="20">
+		<style name="Default" x="75" y="0" width="40" height="60">
 			<slice name="Normal" x="75" y="0" width="20" height="20" checked="false" />
 			<slice name="Hover" x="75" y="20" width="20" height="20" checked="false" />
 			<slice name="Down" x="75" y="40" width="20" height="20" checked="false" />
@@ -21,13 +21,23 @@
 		</style>
 	</element>
 	<element name="Radio">
-		<style name="Default" x="115" y="0" width="20" height="20">
+		<style name="Default" x="115" y="0" width="40" height="60">
 			<slice name="Normal" x="115" y="0" width="20" height="20" checked="false" />
 			<slice name="Hover" x="115" y="20" width="20" height="20" checked="false" />
 			<slice name="Down" x="115" y="40" width="20" height="20" checked="false" />
 			<slice name="Normal" x="135" y="0" width="20" height="20" checked="true" />
 			<slice name="Hover" x="135" y="20" width="20" height="20" checked="true" />
 			<slice name="Down" x="135" y="40" width="20" height="20" checked="true" />
+		</style>
+	</element>
+	<element name="Handle">
+		<style name="Default" x="75" y="60" width="40" height="20">
+			<slice name="Left" x="75" y="60" width="10" height="20" />
+			<slice name="Middle" x="85" y="60" width="10" height="20" />
+			<slice name="Right" x="95" y="60" width="10" height="20" />
+			<slice name="Normal" x="105" y="60" width="10" height="20" />
+			<slice name="Hover" x="115" y="60" width="10" height="20" />
+			<slice name="Down" x="125" y="60" width="10" height="20" />
 		</style>
 	</element>
 </clash>

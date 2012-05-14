@@ -65,7 +65,7 @@ class Handle extends Button
 	{
 		super.update();
 
-		var mX : Float = Input.mouseFlashX;
+		var mX : Float = world.mouseX;
 		if (Input.mouseDown && collidePoint(x, y, mX, Input.mouseY)) {
 			trace(Std.format("mouseX: ${mX}, x: ${graphic.x}"));
 			shift(mX);
