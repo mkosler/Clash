@@ -59,8 +59,7 @@ class Handle extends Button
 		super.update();
 
 		if (_clicked) {
-			// Hack, until I figure out what the fucking problem is
-			shift(clamp(world.mouseX, x, x + (width - _normal.width)) - _normal.width);
+			shift(clamp(world.mouseX - x, _leftEnd.x, _leftEnd.x + (width - _rightEnd.width)));
 		}
 	}
 
