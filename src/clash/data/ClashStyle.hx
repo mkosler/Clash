@@ -61,7 +61,7 @@ class ClashStyle
 	 */
 	public function getSlice(name : String, checked : Bool = false) : ClashSlice
 	{
-		if (hasSingleSlice) {
+		if (hasSingleSlice && (name == "Hover" || name == "Down")) {
 			name = "Normal";
 		}
 		if (_slices.exists(name)) {

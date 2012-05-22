@@ -26,8 +26,6 @@
 			<slice name="Middle" x="85" y="60" width="10" height="20" />
 			<slice name="Right" x="95" y="60" width="10" height="20" />
 			<slice name="Normal" x="105" y="60" width="10" height="20" />
-			<slice name="Hover" x="115" y="60" width="10" height="20" />
-			<slice name="Down" x="125" y="60" width="10" height="20" />
 		</style>
 	</element>
 </clash>
