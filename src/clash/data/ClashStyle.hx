@@ -33,6 +33,11 @@ class ClashStyle
 	/**
 	 * @private
 	 */
+	public var hasSingleSlice(default, null) : Bool;
+
+	/**
+	 * @private
+	 */
 	public function new(name : String, x : Float, y : Float, width : Int, height : Int, slices : Array<ClashSlice>)
 	{
 		this.name = name;
@@ -41,9 +46,13 @@ class ClashStyle
 		this.width = width;
 		this.height = height;
 		_slices = new Hash<ClashSlice>();
+		hasSingleSlice = true;
 		for (i in 0...slices.length) {
 			var sliceName : String = slices[i].checked ? (slices[i].name + "Checked") : slices[i].name;
 			_slices.set(sliceName, slices[i]);
+			if (slices[i].name == "Hover" || slices[i].name == "Down") {
+				hasSingleSlice = false;
+			}
 		}
 	}
 
@@ -52,9 +61,11 @@ class ClashStyle
 	 */
 	public function getSlice(name : String, checked : Bool = false) : ClashSlice
 	{
+		if (hasSingleSlice) {
+			name = "Normal";
+		}
 		if (_slices.exists(name)) {
-			if (checked) return _slices.get(name + "Checked");
-			else return _slices.get(name);
+			return !checked ? _slices.get(name) : _slices.get(name + "Checked");
 		} else {
 			trace(Std.format("Unknown slice name: ${name}"));
 			return null;

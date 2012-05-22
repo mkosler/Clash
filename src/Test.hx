@@ -20,7 +20,7 @@ class Test extends World
 	{
 		super();
 
-		_currentClash = ClashParser.parse("clash/default.clash");
+		_currentClash = ClashParser.parse("clash/singleslice.clash");
 	}
 
 	public override function begin() : Void

@@ -37,7 +37,7 @@ class Button extends ClashWidget
 	 * @param text 		Label of the button (Optional)
 	 * @param calling 	Callback function for the widget, which is activated when the widget is pressed
 	 */
-	public function new(x : Float, y : Float, clash : Clash, style : String = "Default", text : String = "", calling : Void -> Void = null)
+	public function new(x : Float, y : Float, clash : Clash = null, style : String = "Default", text : String = "", calling : Void -> Void = null)
 	{
 		super(x, y, clash, style);
 
