@@ -1,5 +1,6 @@
 bin/
 content/
+wiki/
 build.build
 *.html
 *.n

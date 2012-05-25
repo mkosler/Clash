@@ -3,64 +3,95 @@ package;
 import haxe.xml.Fast;
 import sys.io.File;
 
-import ClashParser;
+import clash.data.ClashParser;
 
-class Main 
+typedef ArgumentFunction = Array<String> -> Void;
+typedef Option = Hash<Array<String>>;
+
+class Main
 {
-	private static var help : String = File.getContent(Sys.getCwd() + "help.txt");
-	private static var clashExtension : String = "clash";
-
-	private function new(args : Array<String>)
+	function new()
 	{
-		// for (i in 0...args.length) {
-		// 	trace(Std.format("$i: ${args[i]}"));
-		// }
-
-		if (args[0] == null) {
-			// Start GUI interface without a starting file
+		var helpArg : EReg = ~/-*help/i;
+		if (Sys.args().length == 0 || helpArg.match(Sys.args()[0])) {
+			printHelp();
 		} else {
-			switch(args[0]) {
-				case "add":
-				case "clear":
-				case "list":
-				case "build":
-				case "parse":
-					ClashParser.parse(checkExtension(sys.FileSystem.fullPath(args[1])));
-					ClashParser.print();
-					// var parser : ClashParser = new ClashParser(checkExtension(sys.FileSystem.fullPath(args[1])));
-					// parser.parse();
-					// parser.print();
-				case "gui":
-				default:
-					trace(Std.format("Unknown option argument: ${args[0]}"));
-					printHelp();
-			}
-		}
-	}
-
-	private function checkExtension(path : String) 
-	{
-		var ext : String = haxe.io.Path.extension(path);
-		if (ext != clashExtension) {
-			throw Std.format("Unknown file type: $ext; XML file must have an extension of $clashExtension");
-		} else {
-			return path;
+			var mainArg : String = spliceArgs(Sys.args(), _options, _flags);
+			trace(Std.format("
+Main Argument: $mainArg
+Options: $_options
+Flags: $_flags"));
 		}
 	}
 
 	public static function main()
 	{
 		try {
-			var app : Main = new Main(Sys.args());
+			var app = new Main();
 		} catch (e : String) {
 			trace(e);
-			printHelp();
 		}
 	}
 
-	public static function printHelp() : Void
+	private static function checkExtension(path : String) 
 	{
-		trace(help);
+		var ext : String = haxe.io.Path.extension(path);
+		if (ext != _clashExtension) {
+			throw Std.format("Unknown file type: $ext; XML file must have an extension of $_clashExtension");
+		} else {
+			return path;
+		}
+	}
+
+
+	private static function printHelp() : Void
+	{
+		trace(_help);
 		Sys.exit(1);
 	}
+
+	private static function build(options : Array<String>) : Void
+	{
+		return null;
+	}
+
+	private static function spliceArgs(arguments : Array<String>, options : Option = null, flags : Array<String> = null) : String
+	{
+		var mainArg : String = arguments.shift();
+		if (options != null || flags != null) {
+			while (arguments.length > 0) {
+				var argBuffer : String = arguments.shift();
+				if (arguments.length == 0 || StringTools.startsWith(arguments[0], "-")) {
+					flags.push(argBuffer);
+				} else if (options != null) {
+					options.set(argBuffer, spliceOptionArgs(arguments));
+				}
+			}
+		}
+		return mainArg;
+	}
+
+	private static function spliceOptionArgs(arguments : Array<String>) : Array<String>
+	{
+		var optionArgs : Array<String> = new Array<String>();
+		while (arguments.length != 0 && !StringTools.startsWith(arguments[0], "-")) {
+			optionArgs.push(arguments.shift());
+		}
+		return optionArgs;
+	}
+
+	private static var _help : String = File.getContent(Sys.getCwd() + "help.txt");
+	private static var _clashExtension : String = "clash";
+	// private static var _knownArguments : Hash<ArgumentFunction> = {
+	// 	var args : Hash<ArgumentFunction> = new Hash<ArgumentFunction>();
+	// 	args.set("add", null);
+	// 	args.set("clear", null);
+	// 	args.set("list", null);
+	// 	args.set("build", null);
+	// 	args.set("parse", null);
+	// 	args.set("gui", null);
+	// 	return args;
+	// };
+	private static var _options : Option = new Option();
+	private static var _flags : Array<String> = new Array<String>();
 }
